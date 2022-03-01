@@ -39,6 +39,7 @@ class TrainingSet(tc_Dataset):
         '''
         Load a snippet according to the given video name and index.
         '''
+        # FIXME: str(t_idx).zfill(4)
         pth_path = join(self.root_dir, vid_name, f'{str(t_idx).zfill(4)}.pth')
         return torch.load(pth_path)[s_idx]
 

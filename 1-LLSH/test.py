@@ -174,11 +174,13 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
 
     # Query stage
+    t_q0 =  ttime()
     print("Query stage ...")
     len_dataset = len(TestingSet(root_dir=args.query_data))
     score_queue = mp.Manager().Queue(maxsize=len_dataset)
 
     mp.spawn(cal_anomaly_score, args=(args.workers, score_queue, args, llsh_pth), nprocs=args.workers)
+    t_q1 = ttime()
 
     assert score_queue.full()
     score_dict = {}
@@ -197,3 +199,4 @@ if __name__ == '__main__':
 
     t1 = ttime()
     logger.info(f"Time={(t1-t0)/60:.1f} min")
+    logger.info(f"Query Time={(t_q1-t_q0)/60:.1f} min")

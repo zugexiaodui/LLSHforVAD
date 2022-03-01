@@ -43,6 +43,7 @@ def extract_feature_long_sp(proc_id, num_gpus, num_procs, cfg):
 
             if exists(_save_path):
                 print(f"{_save_path} exists. Skip.")
+		continue
 
             if not exists(dirname(_save_path)):
                 os.makedirs(dirname(_save_path))

@@ -48,6 +48,7 @@ def extract_feature_short_sp(proc_id, num_gpus, num_procs, cfg):
 
             if exists(_save_path):
                 print(f"{_save_path} exists. Skip.")
+		continue
 
             if not exists(dirname(_save_path)):
                 os.makedirs(dirname(_save_path))
@@ -57,7 +58,7 @@ def extract_feature_short_sp(proc_id, num_gpus, num_procs, cfg):
 
             feature_dict = OrderedDict()
 
-            vid_name, frame_stack = dataset[i_vid]
+            # vid_name, frame_stack = dataset[i_vid]
 
             frame_stack = frame_stack.permute(0, 2, 3, 1)  # -> NHWC
             frame_stack = tensor_normalize(frame_stack, _dmean, _dstd)
